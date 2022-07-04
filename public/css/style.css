@@ -91,7 +91,7 @@ a {
 	overflow-y: scroll;
 }
 
-#chat-messages img {
+img {
     max-width: 99%;
 }
 
