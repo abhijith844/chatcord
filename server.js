@@ -53,7 +53,7 @@ io.on('connection', socket => {
 
   socket.on('img', function (imgData, color) {
     const user = getCurrentUser(socket.id);
-    io.to(user.room).emit('newImg', socket.nickname, imgData, color);
+    io.to(user.room).emit('newImg', user.username, imgData, color);
   });
 
   // Runs when client disconnects

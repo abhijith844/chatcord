@@ -54,14 +54,20 @@ chatForm.addEventListener('submit', (e) => {
 });
 // Output Image to DOM
 function displayImage(user, imgData, color) {
+  console.log(user,'user')
   const div = document.createElement('div');
   div.classList.add('message');
-  const msgToDisplay = document.createElement('p'),
-    date = new Date().toTimeString().substr(0, 8);
-  msgToDisplay.style.color = color || '#000';
-  msgToDisplay.innerText = user;
-  msgToDisplay.innerHTML = '<span>(' + date + '): </span> <br/>' + '<a href="' + imgData + '" target="_blank"><img src="' + imgData + '"/></a>';
-  div.appendChild(msgToDisplay);
+  const p = document.createElement('p');
+  p.classList.add('meta')
+  date = new Date().toTimeString().substr(0, 8);
+  p.style.color = color || '#000';
+  p.innerText = user;
+  p.innerHTML += `<span>${date}</span> <br/>`;
+  div.appendChild(p);
+  const img = document.createElement('p');
+  img.classList.add('text');
+  img.innerHTML = '<a href="' + imgData + '" target="_blank"><img src="' + imgData + '"/></a>';
+  div.appendChild(img);
   // div.scrollTop = div.scrollHeight;
   document.querySelector('.chat-messages').appendChild(div);
 }
@@ -108,7 +114,7 @@ document.getElementById('sendImage').addEventListener('change', function () {
     reader.onload = function (e) {
       this.value = '';
       socket.emit('img', e.target.result, color);
-      displayImage('me', e.target.result, color);
+      // displayImage('me', e.target.result, color);
     };
     reader.readAsDataURL(file);
   };
